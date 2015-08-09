@@ -39,7 +39,7 @@ then
     make -C infer java
     cd ../../
 
-    ${INFER_PATH} -- ./gradlew assembleDebug
+    ${INFER_PATH} -- ./gradlew --full-stacktrace assembleDebug
 
 else
     echo "Something went wrong :("
