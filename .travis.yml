@@ -1,2 +1,4 @@
 language: android
 jdk: oraclejdk8
+script:
+    - "./scripts/run-fb-infer.sh"
