@@ -5,6 +5,8 @@ android:
         - tools
         - build-tools-22.0.1
         - android-22
+        - extra-android-m2repository
+        - extra-android-support
 jdk: oraclejdk8
 script:
     - "./scripts/run-fb-infer.sh"
