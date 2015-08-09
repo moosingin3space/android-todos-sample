@@ -27,20 +27,19 @@ eval `./opam config env`
 # 2. Install Infer (latest version)
 INFER_GIT_PATH="https://github.com/facebook/infer.git"
 echo "> Try to Clone Infer from ${INFER_GIT_PATH}"
-git clone ${INFER_GIT_PATH}
+git clone ${INFER_GIT_PATH} vendor/infer
 
-INFER_PATH="./infer/infer/bin/infer"
+INFER_PATH="./vendor/infer/infer/bin/infer"
 if [ -s ${INFER_PATH} ]
 then
     echo "Infer downloaded successfully."
 
     echo "Try to Make Infer."
-    cd infer/
+    cd vendor/infer/
     make -C infer java
-    export PATH=`pwd`/infer/bin:$PATH
-    cd ../
+    cd ../../
 
-    ./infer/infer/bin/infer -- ./gradlew assembleDebug
+    ${INFER_PATH} -- ./gradlew assembleDebug
 
 else
     echo "Something went wrong :("
