@@ -25,9 +25,11 @@ eval `./opam config env`
 
 
 # 2. Install Infer (latest version)
-INFER_GIT_PATH="https://github.com/facebook/infer.git"
-echo "> Try to Clone Infer from ${INFER_GIT_PATH}"
-git clone ${INFER_GIT_PATH} vendor/infer
+if [ ! -d vendor/infer ]; then
+    INFER_GIT_PATH="https://github.com/facebook/infer.git"
+    echo "> Try to Clone Infer from ${INFER_GIT_PATH}"
+    git clone ${INFER_GIT_PATH} vendor/infer
+fi
 
 INFER_PATH="./vendor/infer/infer/bin/infer"
 if [ -s ${INFER_PATH} ]
