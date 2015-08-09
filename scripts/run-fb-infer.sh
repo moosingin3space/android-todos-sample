@@ -12,16 +12,18 @@ set -ev
 echo "*** TRY TO INIT INFER ***"
 
 # 1. Install Opaml
-echo "> Try to get OPAM package"
-wget https://github.com/ocaml/opam/releases/download/1.2.2/opam-1.2.2-x86_64-Linux -O opam
-chmod ugo+x opam
-./opam init --yes --comp=4.01.0 #(then say 'y' to the final question)
-eval `./opam config env`
-./opam install --yes sawja.1.5.1 atdgen.1.6.0 javalib.2.3.1 extlib.1.5.4 #(then say 'y' to the question)
+if [ ! -s vendor/opam ]; then
+    echo "> Try to get OPAM package"
+    wget https://github.com/ocaml/opam/releases/download/1.2.2/opam-1.2.2-x86_64-Linux -O vendor/opam
+    chmod ugo+x vendor/opam
+    ./vendor/opam init --yes --comp=4.01.0 #(then say 'y' to the final question)
+    eval `./vendor/opam config env`
+    ./vendor/opam install --yes sawja.1.5.1 atdgen.1.6.0 javalib.2.3.1 extlib.1.5.4 #(then say 'y' to the question)
+fi
 
 
 # Good reference at http://www.cyberciti.biz/faq/unix-linux-test-existence-of-file-in-bash/
-[ -s opam ] && echo "Opam downloaded successfully." || echo "Something went wrong :("
+[ -s vendor/opam ] && echo "Opam downloaded successfully." || echo "Something went wrong :("
 
 
 # 2. Install Infer (latest version)
